@@ -8,14 +8,9 @@ class App {
     this.app = express();
 
     this.config();
-    this.router();
 
     // Não remover essa rota
     this.app.get('/', (req, res) => res.json({ ok: true }));
-  }
-
-  private router(): void {
-    this.app.use('/teams', teamRouter);
   }
 
   private config():void {
@@ -28,6 +23,7 @@ class App {
 
     this.app.use(express.json());
     this.app.use(accessControl);
+    this.app.use('/teams', teamRouter);
   }
 
   public start(PORT: string | number):void {
