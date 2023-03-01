@@ -18,4 +18,11 @@ export default class LoginService {
     const token = Jwt.jwtConfig(email);
     return { token };
   }
+
+  async loginRole(email: string): Promise<string | undefined> {
+    const userEmail = await this.userModel.findOne({ where: { email } });
+    if (!userEmail) return undefined;
+
+    return userEmail.role;
+  }
 }
