@@ -15,4 +15,11 @@ export default class TeamController {
     await this.matcheService.finish(Number(id));
     return res.status(200).json({ message: 'Finished' });
   }
+
+  public async update(req: Request, res: Response):Promise<Response | void > {
+    const { id } = req.params;
+    const { homeTeamGoals, awayTeamGoals } = req.body;
+    await this.matcheService.update(Number(id), homeTeamGoals, awayTeamGoals);
+    return res.status(200).json({ message: 'Matche Update' });
+  }
 }

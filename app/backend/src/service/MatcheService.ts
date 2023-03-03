@@ -25,4 +25,9 @@ export default class LoginService {
     await this.userModel.findByPk(id);
     await this.userModel.update({ inProgress: false }, { where: { id } });
   }
+
+  async update(id: number, homeTeamGoals: number, awayTeamGoals: number):Promise<number[] |
+  undefined> {
+    return this.userModel.update({ homeTeamGoals, awayTeamGoals }, { where: { id } });
+  }
 }

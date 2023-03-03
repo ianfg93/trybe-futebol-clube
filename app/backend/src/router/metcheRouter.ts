@@ -12,5 +12,10 @@ router.patch(
   tokenValidation,
   (req: Request, res: Response) => metcheController.finish(req, res),
 );
+router.patch(
+  '/:id',
+  tokenValidation,
+  (req: Request, res: Response) => metcheController.update(req, res),
+);
 
 export default router;
