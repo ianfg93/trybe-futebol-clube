@@ -2,7 +2,7 @@ import { ModelStatic } from 'sequelize';
 import MatcheModel from '../database/models/MatcheModel';
 import TeamModel from '../database/models/TeamModel';
 
-export default class LoginService {
+export default class MatcheService {
   protected userModel: ModelStatic<MatcheModel> = MatcheModel;
 
   async getAllMatches(inProgress: unknown): Promise<MatcheModel[]> {
@@ -29,5 +29,20 @@ export default class LoginService {
   async update(id: number, homeTeamGoals: number, awayTeamGoals: number):Promise<number[] |
   undefined> {
     return this.userModel.update({ homeTeamGoals, awayTeamGoals }, { where: { id } });
+  }
+
+  async newMatch(
+    homeTeamId: number,
+    homeTeamGoals: number,
+    awayTeamId: number,
+    awayTeamGoals: number,
+  )
+    :Promise<MatcheModel> {
+    return this.userModel.create({
+      homeTeamId,
+      homeTeamGoals,
+      awayTeamId,
+      awayTeamGoals,
+      inProgress: true });
   }
 }

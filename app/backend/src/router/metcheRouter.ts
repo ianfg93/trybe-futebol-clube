@@ -1,6 +1,7 @@
 import { Router, Request, Response } from 'express';
 import tokenValidation from '../middleware/token';
 import MetcheController from '../controller/MetcheController';
+import matcheValidation from '../middleware/matche';
 
 const metcheController = new MetcheController();
 
@@ -16,6 +17,12 @@ router.patch(
   '/:id',
   tokenValidation,
   (req: Request, res: Response) => metcheController.update(req, res),
+);
+router.post(
+  '/',
+  tokenValidation,
+  matcheValidation,
+  (req: Request, res: Response) => metcheController.newMatch(req, res),
 );
 
 export default router;

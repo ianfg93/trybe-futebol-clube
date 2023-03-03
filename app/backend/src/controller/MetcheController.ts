@@ -22,4 +22,15 @@ export default class TeamController {
     await this.matcheService.update(Number(id), homeTeamGoals, awayTeamGoals);
     return res.status(200).json({ message: 'Matche Update' });
   }
+
+  public async newMatch(req: Request, res: Response):Promise<Response | void > {
+    const { homeTeamId, homeTeamGoals, awayTeamId, awayTeamGoals } = req.body;
+    const newGame = await this.matcheService.newMatch(
+      homeTeamId,
+      homeTeamGoals,
+      awayTeamId,
+      awayTeamGoals,
+    );
+    return res.status(201).json(newGame);
+  }
 }
