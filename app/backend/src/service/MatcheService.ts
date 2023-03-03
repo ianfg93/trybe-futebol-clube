@@ -20,4 +20,9 @@ export default class LoginService {
     }
     return matches;
   }
+
+  async finish(id: number):Promise<void> {
+    await this.userModel.findByPk(id);
+    await this.userModel.update({ inProgress: false }, { where: { id } });
+  }
 }

@@ -9,4 +9,10 @@ export default class TeamController {
     const matches = await this.matcheService.getAllMatches(inProgress);
     return res.status(200).json(matches);
   }
+
+  public async finish(req: Request, res: Response):Promise<Response | void > {
+    const { id } = req.params;
+    await this.matcheService.finish(Number(id));
+    return res.status(200).json({ message: 'Finished' });
+  }
 }
